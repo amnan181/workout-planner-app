@@ -1,20 +1,32 @@
+import { ThemeProvider as NavThemeProvider } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+
 import './global.css';
-import AppView from '~/components/common/AppView/AppVIew';
-import AppButton from '~/components/common/appButton/AppButton';
-import { AppContainer } from '~/components/common/appContainer/AppContainer';
-import AppInput from '~/components/common/appInput/AppInput';
-import AppText from '~/components/common/appText/AppText';
+import 'expo-dev-client';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import { useColorScheme, useInitialAndroidBarSync } from '~/lib/useColorScheme';
+import FeatureOverviewScreen from '~/screens/featureOverviewScreen/FeatureOverviewScreen';
+import { NAV_THEME } from '~/theme';
+// export {
+//   // Catch any errors thrown by the Layout component.
+//   ErrorBoundary,
+// } from 'expo-router';
 
 export default function App() {
+  useInitialAndroidBarSync();
+  const { colorScheme, isDarkColorScheme } = useColorScheme();
   return (
-    <AppContainer>
-      <StatusBar style="auto" />
-      <AppView className="space-y-4">
-        <AppText className="text-2xl font-bold">Welcome to NativeWind!</AppText>
-        <AppInput placeholder="Enter your name" className="border-2 border-blue-500" />
-        <AppButton title="Click Me" onPress={() => alert('Button clicked!')} />
-      </AppView>
-    </AppContainer>
+    <GestureHandlerRootView>
+      <StatusBar
+        key={`root-status-bar-${isDarkColorScheme ? 'light' : 'dark'}`}
+        style={isDarkColorScheme ? 'light' : 'dark'}
+        backgroundColor="#F3F2F7"
+      />
+
+      <NavThemeProvider value={NAV_THEME[colorScheme]}>
+        <FeatureOverviewScreen />
+      </NavThemeProvider>
+    </GestureHandlerRootView>
   );
 }

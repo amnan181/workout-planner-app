@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text as RNText, TextProps } from 'react-native';
+import { TextProps } from 'react-native';
+import { Text } from '~/components/nativewindui/Text';
 
 interface TextComponentProps extends TextProps {
   className?: string;
@@ -7,9 +8,9 @@ interface TextComponentProps extends TextProps {
 
 const AppText: React.FC<TextComponentProps> = ({ children, className, ...rest }) => {
   return (
-    <RNText className={`text-black ${className}`} {...rest}>
+    <Text className={` ${className}`} {...rest}>
       {children}
-    </RNText>
+    </Text>
   );
 };
 
