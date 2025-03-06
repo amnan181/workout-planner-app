@@ -16,7 +16,7 @@ Ensure you have the following installed:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/your-project.git
+   git clone git@github.com:amnan181/workout-planner-app.git
    ```
 2. Navigate to the project directory:
    ```sh
